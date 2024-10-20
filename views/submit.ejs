@@ -6,15 +6,33 @@
     <h1 class="display-3">Secrets</h1>
     <p class="secret-text">Don't keep your secrets, share them anonymously!</p>
 
+    <% if (messages.success) { %>
+    <div class="alert alert-success"><%= messages.success %></div>
+<% } %>
+<% if (messages.error) { %>
+    <div class="alert alert-danger"><%= messages.error %></div>
+<% } %>
+
+
     <form action="/submit" method="POST">
 
       <div class="form-group">
-        <input type="text" class="form-control text-center" name="secret" placeholder="What's your secret?">
+        <label for="secret">Your Secret</label>
+        <input type="text" class="form-control text-center" name="secret" placeholder="What's your secret?" autocomplete="off" required>
       </div>
       <button type="submit" class="btn btn-dark">Submit</button>
     </form>
-
-
   </div>
 </div>
+
+<script>
+  document.querySelector('form').addEventListener('submit', function() {
+    document.querySelector('button[type="submit"]').disabled = true;
+  });
+  window.onload = function() {
+  document.querySelector('button[type="submit"]').disabled = false;
+};
+</script>
+
+
 <%- include('partials/footer') %>
